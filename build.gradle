@@ -1,0 +1,92 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven { url "https://repo1.maven.org/maven2" }
+  }
+  dependencies {
+    classpath "org.openapitools:openapi-generator-gradle-plugin:4.3.1"
+  }
+}
+
+plugins {
+    id 'groovy'
+    id 'org.springframework.boot' version '2.3.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id "com.github.ben-manes.versions" version "0.33.0"
+    id 'io.openapiprocessor.openapi-processor' version '1.0.0.M9'
+}
+
+apply plugin: 'org.openapi.generator'
+
+group = 'io.openapiprocessor'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral ()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.codehaus.groovy:groovy'
+
+    // required by openapi-generator
+    implementation 'io.swagger:swagger-annotations:1.6.2'
+
+    testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform ()
+}
+
+
+/*
+ * openapi-generator
+ */
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/api/openapi.yaml".toString()
+    outputDir = "$buildDir/openapi-generator".toString()
+    apiPackage = "io.openapiprocessor.oag.api"
+    modelPackage = "op.openapiprocessor.oag.model"
+    configOptions = [
+        sourceFolder: "",
+        interfaceOnly: "true",
+        dateLibrary: "java8",
+        useBeanValidation: "false",
+        hideGenerationTimestamp: "true",
+        skipDefaultInterface: "true"
+    ]
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+
+/*
+ * openapi-processor
+ */
+
+openapiProcessor {
+    apiPath "${projectDir}/src/api/openapi.yaml"
+
+    spring {
+        processor 'io.openapiprocessor:openapi-processor-spring:1.0.0.M18-kotlin-SNAPSHOT'
+        targetDir "$buildDir/openapi-processor"
+        mapping "${projectDir}/src/api/mapping.yaml"
+        //parser 'OPENAPI4J'
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'build/openapi-generator/'
+            srcDir 'build/openapi-processor'
+        }
+    }
+}
+
+compileJava.dependsOn ('processSpring')

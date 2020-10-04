@@ -1,0 +1,26 @@
+openapi: 3.0.2
+info:
+  title: sample api
+  version: 1.0.0
+
+paths:
+  /foo:
+    get:
+      operationId: get-foo
+      summary: a hello world like endpoint
+      description: >
+        a simple endpoint that just return plain text.
+      parameters:
+        - name: bar
+          description: simple request parameter
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: simple string response
+          content:
+            text/plain:
+              schema:
+                type: string
