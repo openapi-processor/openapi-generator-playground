@@ -1,10 +1,3 @@
-:oap-docs: https://docs.openapiprocessor.io
-:oap-spring: https://github.com/openapi-processor/openapi-processor-spring
-
 == openapi-generator-playground
 
-simple Spring Boot project to test & compare the genrated code of openapi-processor-spring and openapi-generator spring
-
-== documentation
-
-See link:{oap-docs}[here].
+simple Spring Boot project to test & compare the generated code of openapi-processor-spring and openapi-generator spring
