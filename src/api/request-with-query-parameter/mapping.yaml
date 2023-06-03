@@ -1,7 +1,8 @@
-openapi-processor-mapping: v2
+openapi-processor-mapping: v3
 
 options:
   package-name: io.openapiprocessor.oap
+  javadoc: true
 
 map:
   result: org.springframework.http.ResponseEntity
