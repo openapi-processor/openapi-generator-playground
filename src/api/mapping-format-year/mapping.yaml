@@ -1,0 +1,11 @@
+openapi-processor-mapping: v3
+
+options:
+  generated-date: false
+  package-name: io.openapiprocessor.oap
+  bean-validation: javax
+  javadoc: true
+
+map:
+  types:
+    - type: integer:year => java.time.Year

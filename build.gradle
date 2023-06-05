@@ -48,7 +48,7 @@ sourceSets {
  * sample api path => folder name
  */
 
-def ACTIVE_API = "request-with-query-parameter"
+def ACTIVE_API = "mapping-format-year"
 
 /*
  * openapi-generator
@@ -60,6 +60,12 @@ openApiGenerate {
     outputDir = "$buildDir/openapi-generator".toString()
     apiPackage = "io.openapiprocessor.oag.api"
     modelPackage = "io.openapiprocessor.oag.model"
+    typeMappings.set([
+        "integer+year": "Year"
+    ])
+    importMappings.set([
+       "Year": "java.time.Year"
+    ])
     configOptions.set([
         sourceFolder: "",
         interfaceOnly: "true",
@@ -81,7 +87,7 @@ openapiProcessor {
     apiPath "${projectDir}/src/api/${ACTIVE_API}/openapi.yaml"
 
     spring {
-        processor 'io.openapiprocessor:openapi-processor-spring:2023.1.2'
+        processor 'io.openapiprocessor:openapi-processor-spring:2023.2'
         targetDir "$buildDir/openapi-processor"
         mapping "${projectDir}/src/api/${ACTIVE_API}/mapping.yaml"
         parser 'INTERNAL'

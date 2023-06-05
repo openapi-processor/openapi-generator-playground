@@ -1,0 +1,26 @@
+openapi: 3.1.0
+info:
+  title: pending API
+  version: 1.0.0
+
+paths:
+  /query:
+    get:
+      description: >
+        echo query parameter with type mapping
+      parameters:
+        - name: year
+          description: the year
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: year
+      responses:
+        '200':
+          description: echo response
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: year
