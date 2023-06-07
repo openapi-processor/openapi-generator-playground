@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: sample api
+  title: sample API
   version: 1.0.0
 
 paths:
