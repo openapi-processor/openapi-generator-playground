@@ -49,7 +49,7 @@ sourceSets {
  * sample api path => folder name
  */
 
-def ACTIVE_API = "mapping-format-year"
+def ACTIVE_API = "mapping-additional-properties"
 
 /*
  * openapi-generator
@@ -88,7 +88,8 @@ openapiProcessor {
     apiPath "${projectDir}/src/api/${ACTIVE_API}/openapi.yaml"
 
     spring {
-        processor 'io.openapiprocessor:openapi-processor-spring:2023.2'
+        processor 'io.openapiprocessor:openapi-processor-spring:2023.3-SNAPSHOT'
+        processor 'io.openapiprocessor:openapi-processor-core:2023.3-SNAPSHOT'
         targetDir "$buildDir/openapi-processor"
         mapping "${projectDir}/src/api/${ACTIVE_API}/mapping.yaml"
         parser 'INTERNAL'
