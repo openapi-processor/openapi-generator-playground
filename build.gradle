@@ -25,6 +25,7 @@ dependencies {
 
     // required by openapi-generator
     implementation 'io.swagger.core.v3:swagger-annotations:2.2.10'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
 
     testImplementation ('org.springframework.boot:spring-boot-starter-test') {
 //        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
