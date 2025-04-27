@@ -1,9 +1,9 @@
 plugins {
     java
     groovy
-    id("org.springframework.boot") version "3.1.0"
-    id("io.spring.dependency-management") version "1.1.0"
-    id("com.github.ben-manes.versions") version "0.47.0"
+    id("org.springframework.boot") version "3.4.5"
+    id("io.spring.dependency-management") version "1.1.7"
+    id("com.github.ben-manes.versions") version "0.52.0"
 
     id("org.openapi.generator") version "7.12.0"
     id("io.openapiprocessor.openapi-processor") version "2023.2"
@@ -19,13 +19,13 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.codehaus.groovy:groovy:3.0.9")
+    implementation("org.codehaus.groovy:groovy:3.0.24")
 
     // extra
-    implementation("joda-time:joda-time:2.12.7")
+    implementation("joda-time:joda-time:2.14.0")
 
     // required by openapi-generator
-    implementation("io.swagger.core.v3:swagger-annotations:2.2.22")
+    implementation("io.swagger.core.v3:swagger-annotations:2.2.30")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")
 
     testImplementation ("org.springframework.boot:spring-boot-starter-test") {
@@ -61,6 +61,7 @@ val ACTIVE_API = "train-travel"
  */
 
 openApiGenerate {
+//    verbose = true
     generatorName = "spring"
     inputSpec = "$rootDir/src/api/$ACTIVE_API/openapi.yaml".toString()
     outputDir = "$buildDir/openapi-generator".toString()
